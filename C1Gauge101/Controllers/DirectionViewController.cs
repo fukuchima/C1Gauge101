@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UIKit;
 using C1.iOS.Gauge;
 using C1.iOS.Core;
+using Microsoft.Azure.Mobile.Analytics;
 
 namespace C1Gauge101
 {
@@ -33,7 +34,12 @@ namespace C1Gauge101
 
         public override void UpdateViewConstraints()
         {
-            if (StackView.Axis == UILayoutConstraintAxis.Horizontal)
+			Analytics.TrackEvent("Direction", new Dictionary<string, string>
+			{
+				{ "変更", UILayoutConstraintAxis.Horizontal.ToString() }
+			});
+
+			if (StackView.Axis == UILayoutConstraintAxis.Horizontal)
             {
                 StackViewHeightContraint.Constant = StackView.Superview.Frame.Size.Height;
             }
@@ -49,14 +55,26 @@ namespace C1Gauge101
             base.ViewDidLoad();
             NavigationItem.Title = DirectionTitleKey.Localize();
 
-            var localizedItems = new List<string>();
+			Analytics.TrackEvent("Direction", new Dictionary<string, string>
+			{
+				{ "画面", "スタート" }
+			});
+
+			var localizedItems = new List<string>();
             DirectionItems.ToList().ForEach(x => localizedItems.Add(x.Localize()));
             
             Entry.ToPickerWithValues(localizedItems, 0, (selectedIndex) =>
             {
                 var direction = (LinearGaugeDirection)Enum.Parse(typeof(LinearGaugeDirection), DirectionItems[selectedIndex]);
                 LinearGauge.Direction = BulletGraph.Direction = direction;
-                if (direction == LinearGaugeDirection.Left || direction == LinearGaugeDirection.Right)
+
+				Analytics.TrackEvent("Direction", new Dictionary<string, string>
+			{
+				{ "ゲージ", direction.ToString() }
+			});
+
+
+				if (direction == LinearGaugeDirection.Left || direction == LinearGaugeDirection.Right)
                 {
                     StackView.Axis = UILayoutConstraintAxis.Vertical;
                     View.SetNeedsUpdateConstraints();
@@ -67,6 +85,8 @@ namespace C1Gauge101
                     View.SetNeedsUpdateConstraints();
                 }
             });
-        }
+
+
+		}
     }
 }
