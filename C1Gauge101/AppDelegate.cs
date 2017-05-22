@@ -1,4 +1,7 @@
 ﻿using Foundation;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.Azure.Mobile.Crashes;
 using UIKit;
 
 namespace C1Gauge101
@@ -21,6 +24,10 @@ namespace C1Gauge101
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
             C1.iOS.Core.LicenseManager.Key = License.Key;
+
+			MobileCenter.Start("b4f21ab8-baea-479f-996c-ecc01a024a36",
+				   typeof(Analytics), typeof(Crashes));
+			
 			return true;
 		}
 
