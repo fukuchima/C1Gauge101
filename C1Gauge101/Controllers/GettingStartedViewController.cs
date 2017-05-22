@@ -2,6 +2,8 @@ using Foundation;
 using System;
 using UIKit;
 using C1.iOS.Gauge;
+using Microsoft.Azure.Mobile.Analytics;
+using System.Collections.Generic;
 
 namespace C1Gauge101
 {
@@ -33,6 +35,12 @@ namespace C1Gauge101
 
             ValueLabel.Text = string.Format("{0}: {1:D}", ValueTextKey.Localize(), (int)DefaultValue);
             LinearGauge.Value = DefaultValue;
+
+
+			Analytics.TrackEvent("Getting Started", new Dictionary<string, string> 
+			{
+				{ "選択", "画面" },{ "イベント2", "データ2"}
+			});
         }
 
         private void OnValueChanged(object sender, GaugeValueEventArgs e)
