@@ -1,6 +1,6 @@
 ﻿// WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -20,6 +20,10 @@ namespace C1Gauge101
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        C1Gauge101.iOS.C1TextField Entry { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         C1.iOS.Gauge.C1LinearGauge LinearGauge { get; set; }
 
         [Outlet]
@@ -30,16 +34,16 @@ namespace C1Gauge101
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.NSLayoutConstraint StackViewHeightContraint { get; set; }
 
-        [Outlet]
-        [GeneratedCode("iOS Designer", "1.0")]
-        UIKit.UITextField Entry { get; set; }
-
-
         void ReleaseDesignerOutlets ()
         {
             if (BulletGraph != null) {
                 BulletGraph.Dispose ();
                 BulletGraph = null;
+            }
+
+            if (Entry != null) {
+                Entry.Dispose ();
+                Entry = null;
             }
 
             if (LinearGauge != null) {
